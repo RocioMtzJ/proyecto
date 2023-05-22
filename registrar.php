@@ -10,8 +10,8 @@
 <body>
 <form action="validar1.php" method="post" style="text-align: center;" >
     <font size="7" color="yellow"><h1> Registro</h1>
-    <font size="6"><p>Usuario <input type="text" placeholder="ingrese nombre de usuario" name="usuario"></p>
-    <p>Contraseña <input type="password" placeholder="ingrese su contraseña" name="password"></p></font></font>
+    <font size="6"><p>Usuario <input required type="text" placeholder="ingrese nombre de usuario" name="usuario"></p>
+    <p>Contraseña <input required type="password" placeholder="ingrese su contraseña" name="password"></p></font></font>
     <input type="submit" name="enviar" value="Registrarse"> 
     </form>
      

@@ -9,16 +9,13 @@
 </head>
 <body>
 
-    <form action="validar.php" method="post" style="text-align: center;" >
-    <font size="7" color="yellow"><h1> Bienvenido a MMA EXERCISE</h1>
-    <font size="6"><p>Usuario <input required type="text" placeholder="ingrese nombre de usuario" name="usuario"></p>
+    <form action="validarAdministrador.php" method="post" style="text-align: center;" >
+    <font size="7" color="yellow"><h1> INICIAR SESION COMO ADMINISTRADOR</h1>
+    <font size="6"><p>Usuario <input requierd type="text" placeholder="ingrese nombre de usuario" name="usuario"></p>
     <p>Contraseña <input required type="password" placeholder="ingrese su contraseña" name="password"></p></font></font>
     <input type="submit" value="Ingresar">  
     
     </form>
-    <br>
-    <center><a href="registrar.php"><input type="button" value="Registrarse"></center>
-	<br>
-	<center><a href="administrador.php"><input type="button" value="Entrar como administrador"></center>
 </body>
-</html
+</html>
+<?php

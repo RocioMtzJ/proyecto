@@ -1,38 +1,34 @@
 <?php
-if(isset($_POST['enviar'])){
-$USUARIO=$_POST['usuario'];
-$PASSWORD=$_POST['password'];
-include('db.php');
+#Salir si alguno de los datos no está presente
+if(!isset($_POST["usuario"]) || !isset($_POST["password"])) exit();
 
-$consulta="INSERT INTO usuarios(usuario,password)values('".$USUARIO."','".$PASSWORD."')";
-$resultado=mysqli_query($conexion,$consulta);
-if($resultado){
-    echo " <script language='JavaScript'>
-            alert('los datos fueron ingresados
-            correctamente a la base de datos');
-            location.assign('index.php');
-            </script>
-            ";
-}else{
-    echo "<script language='JavaScript'>
-    alert('ERROR:los datos NO fueron ingresados
-    correctamente a la base de datos');
-    location.assign('index.php');
-    </script>
-    ";
+#conexion a la base de datos
+$password = "";
+$usuario = "root";
+$nombre_base_de_datos = "login";
+try{
+	$base_de_datos = new PDO('mysql:host=localhost;dbname=' . $nombre_base_de_datos, $usuario, $password);
+}catch(Exception $e){
+	echo "Ocurrió algo con la base de datos: " . $e->getMessage();
+    }
+#Si todo va bien, se ejecuta esta parte del código...
+$usuario = $_POST["usuario"];
+$password = $_POST["password"];
 
-}
-mysqli_close($conexion);
-}else{
 
-}
-?>
-<style>
- h1 {text-align: center;}
- p {text-align: center;}
-</style>
-    
-    <font color="red"><h1><p class="center">SE HAN AGREGADO LOS DATOS INTRODUCIDOS</p></h1></font>
-    <center><a href="index.php"><input type="button" value="volver al inicio"></center>
-    <?php
+/*
+	Al incluir el archivo "base_de_datos.php", todas sus variables están
+	a nuestra disposición. Por lo que podemos acceder a ellas tal como si hubiéramos
+	copiado y pegado el código
+*/
+$sentencia = $base_de_datos->prepare("INSERT INTO usuarios(usuario, password) VALUES (?, ?);");
+$resultado = $sentencia->execute([$usuario, $password]); # Pasar en el mismo orden de los ?
+
+#execute regresa un booleano. True en caso de que todo vaya bien, falso en caso contrario.
+#Con eso podemos evaluar
+
+if($resultado === TRUE) echo "Insertado correctamente";
+else echo "Algo salió mal. Por favor verifica que la tabla exista";
+
+
 ?>
